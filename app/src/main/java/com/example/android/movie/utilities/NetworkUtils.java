@@ -3,6 +3,7 @@ package com.example.android.movie.utilities;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.android.movie.enums.DiscoveryFilterEnum;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -22,18 +23,17 @@ public class NetworkUtils {
     /* The number of days we want our API to return */
     private static final int numDays = 14;
 
-    final static String API_KEY = "api_key";
+    private static final String API_KEY = "api_key";
     // TODO: insert your own api key below!
-    final static String API_KEY_VALUE = "";
-    final static String API_NAME = "movie";
-    final static String API_VERSION = "3";
-    final static String POPULAR_MOVIES_PATH = "popular";
+    private static final String API_KEY_VALUE = "";
+    private static final String API_NAME = "movie";
+    private static final String API_VERSION = "3";
 
-    public static URL buildPopularMoviesUrl() {
+    public static URL buildMoviesUrl(DiscoveryFilterEnum filterPath) {
         Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
                 .appendPath(API_VERSION)
                 .appendPath(API_NAME)
-                .appendPath(POPULAR_MOVIES_PATH)
+                .appendPath(filterPath.name())
                 .appendQueryParameter(API_KEY, API_KEY_VALUE)
                 .build();
 

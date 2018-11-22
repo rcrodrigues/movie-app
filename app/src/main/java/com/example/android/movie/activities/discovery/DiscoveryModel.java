@@ -1,6 +1,6 @@
-package com.example.android.movie.data;
+package com.example.android.movie.activities.discovery;
 
-public class Movie {
+public class DiscoveryModel {
 
     private Object posterPath;
     private Boolean adult;
@@ -20,7 +20,7 @@ public class Movie {
         return posterPath;
     }
 
-    public Movie setPosterPath(Object posterPath) {
+    public DiscoveryModel setPosterPath(Object posterPath) {
         this.posterPath = posterPath;
         return this;
     }
@@ -29,7 +29,7 @@ public class Movie {
         return adult;
     }
 
-    public Movie setAdult(Boolean adult) {
+    public DiscoveryModel setAdult(Boolean adult) {
         this.adult = adult;
         return this;
     }
@@ -38,7 +38,7 @@ public class Movie {
         return overview;
     }
 
-    public Movie setOverview(String overview) {
+    public DiscoveryModel setOverview(String overview) {
         this.overview = overview;
         return this;
     }
@@ -47,7 +47,7 @@ public class Movie {
         return releaseDate;
     }
 
-    public Movie setReleaseDate(String releaseDate) {
+    public DiscoveryModel setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
         return this;
     }
@@ -56,7 +56,7 @@ public class Movie {
         return id;
     }
 
-    public Movie setId(Integer id) {
+    public DiscoveryModel setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -65,7 +65,7 @@ public class Movie {
         return originalTitle;
     }
 
-    public Movie setOriginalTitle(String originalTitle) {
+    public DiscoveryModel setOriginalTitle(String originalTitle) {
         this.originalTitle = originalTitle;
         return this;
     }
@@ -74,7 +74,7 @@ public class Movie {
         return originalLanguage;
     }
 
-    public Movie setOriginalLanguage(String originalLanguage) {
+    public DiscoveryModel setOriginalLanguage(String originalLanguage) {
         this.originalLanguage = originalLanguage;
         return this;
     }
@@ -83,7 +83,7 @@ public class Movie {
         return title;
     }
 
-    public Movie setTitle(String title) {
+    public DiscoveryModel setTitle(String title) {
         this.title = title;
         return this;
     }
@@ -92,7 +92,7 @@ public class Movie {
         return backdropPath;
     }
 
-    public Movie setBackdropPath(Object backdropPath) {
+    public DiscoveryModel setBackdropPath(Object backdropPath) {
         this.backdropPath = backdropPath;
         return this;
     }
@@ -101,7 +101,7 @@ public class Movie {
         return popularity;
     }
 
-    public Movie setPopularity(Double popularity) {
+    public DiscoveryModel setPopularity(Double popularity) {
         this.popularity = popularity;
         return this;
     }
@@ -110,7 +110,7 @@ public class Movie {
         return voteCount;
     }
 
-    public Movie setVoteCount(Integer voteCount) {
+    public DiscoveryModel setVoteCount(Integer voteCount) {
         this.voteCount = voteCount;
         return this;
     }
@@ -119,7 +119,7 @@ public class Movie {
         return video;
     }
 
-    public Movie setVideo(Boolean video) {
+    public DiscoveryModel setVideo(Boolean video) {
         this.video = video;
         return this;
     }
@@ -128,7 +128,7 @@ public class Movie {
         return voteAverage;
     }
 
-    public Movie setVoteAverage(Double voteAverage) {
+    public DiscoveryModel setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
         return this;
     }
