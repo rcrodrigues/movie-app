@@ -2,7 +2,7 @@ package com.example.android.movie.activities.discovery;
 
 public class DiscoveryModel {
 
-    private Object posterPath;
+    private String posterPath;
     private Boolean adult;
     private String overview;
     private String releaseDate;
@@ -10,17 +10,17 @@ public class DiscoveryModel {
     private String originalTitle;
     private String originalLanguage;
     private String title;
-    private Object backdropPath;
+    private String backdropPath;
     private Double popularity;
     private Integer voteCount;
     private Boolean video;
     private Double voteAverage;
 
-    public Object getPosterPath() {
+    public String getPosterPath() {
         return posterPath;
     }
 
-    public DiscoveryModel setPosterPath(Object posterPath) {
+    public DiscoveryModel setPosterPath(String posterPath) {
         this.posterPath = posterPath;
         return this;
     }
@@ -88,11 +88,11 @@ public class DiscoveryModel {
         return this;
     }
 
-    public Object getBackdropPath() {
+    public String getBackdropPath() {
         return backdropPath;
     }
 
-    public DiscoveryModel setBackdropPath(Object backdropPath) {
+    public DiscoveryModel setBackdropPath(String backdropPath) {
         this.backdropPath = backdropPath;
         return this;
     }

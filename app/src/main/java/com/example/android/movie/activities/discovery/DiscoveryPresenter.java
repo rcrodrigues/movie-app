@@ -1,5 +1,7 @@
 package com.example.android.movie.activities.discovery;
 
+import com.example.android.movie.enums.DiscoveryFilterEnum;
+
 public class DiscoveryPresenter implements DiscoveryContract.Presenter{
 
     DiscoveryContract.View view;
@@ -11,10 +13,8 @@ public class DiscoveryPresenter implements DiscoveryContract.Presenter{
     }
 
     @Override
-    public void presentText() {
-
-        String text = interactor.fetchText();
-        view.showText(text);
+    public void discover() {
+        DiscoveryModel[] discoveryModels = interactor.loadData(DiscoveryFilterEnum.POPULAR_MOVIES_PATH, view);
+        view.showMovies(discoveryModels);
     }
-
 }

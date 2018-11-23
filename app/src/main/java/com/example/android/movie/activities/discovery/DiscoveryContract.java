@@ -1,17 +1,24 @@
 package com.example.android.movie.activities.discovery;
 
+import android.app.Activity;
+
+import com.example.android.movie.enums.DiscoveryFilterEnum;
+
+import java.net.URL;
+
 public interface DiscoveryContract {
 
     interface View{
-        void showText(String texto);
+        void showMovies(DiscoveryModel[] texto);
+        DiscoveryModel[] getMovies(URL endpoint);
     }
 
     interface Interactor {
-        String fetchText();
+        DiscoveryModel[] loadData(DiscoveryFilterEnum filter, DiscoveryContract.View view);
     }
 
     interface Presenter {
-        void presentText();
+        void discover();
     }
 
 }

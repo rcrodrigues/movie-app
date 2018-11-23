@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="185dp"
+    android:layout_height="277dp"
+    android:orientation="vertical"
+    tools:context=".activities.discovery.DiscoveryActivity">
+
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/imageView1"
+        android:contentDescription="@string/app_name"
+        android:layout_width="185dp"
+        android:layout_height="277dp"
+        android:layout_margin="5dp"
+        tools:src="@tools:sample/avatars" />
+
+</LinearLayout>

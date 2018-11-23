@@ -10,4 +10,8 @@ public enum DiscoveryFilterEnum {
     DiscoveryFilterEnum(String s) {
         this.text = s;
     }
+
+    public String getText() {
+        return this.text;
+    }
 }

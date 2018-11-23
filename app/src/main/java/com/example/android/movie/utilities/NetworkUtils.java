@@ -4,6 +4,8 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.example.android.movie.enums.DiscoveryFilterEnum;
+import com.example.android.movie.enums.MoviePosterSizeEnum;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -15,6 +17,7 @@ public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
     private static final String MOVIE_BASE_URL = "http://api.themoviedb.org";
+    private static final String MOVIE_POSTER_BASE_URL = "http://image.tmdb.org/t/p";
 
     /* The format we want our API to return */
     private static final String format = "json";
@@ -33,7 +36,27 @@ public class NetworkUtils {
         Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
                 .appendPath(API_VERSION)
                 .appendPath(API_NAME)
-                .appendPath(filterPath.name())
+                .appendPath(filterPath.getText())
+                .appendQueryParameter(API_KEY, API_KEY_VALUE)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Built URI " + url);
+
+        return url;
+    }
+
+//    http://image.tmdb.org/t/p/w185/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
+    public static URL buildMoviePosterUrl(String moviePath, MoviePosterSizeEnum posterSizeEnum) {
+        Uri builtUri = Uri.parse(MOVIE_POSTER_BASE_URL).buildUpon()
+                .appendPath(posterSizeEnum.getText())
+                .appendPath(moviePath.replace("/",""))
                 .appendQueryParameter(API_KEY, API_KEY_VALUE)
                 .build();
 
