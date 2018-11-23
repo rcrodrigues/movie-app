@@ -16,7 +16,7 @@ public final class MovieJsonUtils {
     private static final String VOTE_AVARAGE  = "vote_average";
     private static final String RELEASE_DATE = "release_date";
 
-    public static DiscoveryModel[] getMovieDataFromJson(Context context, String movieJsonStr) throws JSONException {
+    public static DiscoveryModel[] getMovieDataFromJson(String movieJsonStr) throws JSONException {
 
         final String MOVIE_LIST = "results";
 

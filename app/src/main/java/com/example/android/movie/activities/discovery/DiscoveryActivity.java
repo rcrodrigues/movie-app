@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.android.movie.MainActivity;
 import com.example.android.movie.R;
 import com.example.android.movie.activities.discovery.view.DiscoveryAdapter;
+import com.example.android.movie.enums.DiscoveryFilterEnum;
 import com.example.android.movie.utilities.MovieJsonUtils;
 import com.example.android.movie.utilities.NetworkUtils;
 
@@ -51,63 +52,12 @@ public class DiscoveryActivity extends AppCompatActivity implements DiscoveryCon
         mRecyclerView.setAdapter(mDiscoveryAdapter);
         mRecyclerView.setHasFixedSize(true);
 
-        presenter.discover();
+        presenter.discover(DiscoveryFilterEnum.POPULAR_MOVIES_PATH);
     }
 
     @Override
     public void showMovies(DiscoveryModel[] discoveryModels) {
         mDiscoveryAdapter.setDiscoveryModels(discoveryModels);
-    }
-
-    @Override
-    public DiscoveryModel[] getMovies(URL endpoint) {
-
-        DiscoveryModel[] discoveryModels = null;
-
-        try {
-            discoveryModels = new FetchMoviesTask().execute(endpoint).get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        return discoveryModels;
-    }
-
-
-    private class FetchMoviesTask extends AsyncTask<URL, Void, DiscoveryModel[]> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected DiscoveryModel[] doInBackground(URL... params) {
-
-            if (params.length == 0) {
-                return null;
-            }
-
-            URL moviesRequestUrl = params[0];
-
-            try {
-
-                String jsonMoviesResponse = NetworkUtils.getResponseFromHttpUrl(moviesRequestUrl);
-
-                DiscoveryModel[] discoveryModel = MovieJsonUtils.getMovieDataFromJson(DiscoveryActivity.this, jsonMoviesResponse);
-
-                return discoveryModel;
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(DiscoveryModel[] movies) {
-            super.onPostExecute(movies);
-        }
     }
 
 }

@@ -10,15 +10,15 @@ public interface DiscoveryContract {
 
     interface View{
         void showMovies(DiscoveryModel[] texto);
-        DiscoveryModel[] getMovies(URL endpoint);
+//        DiscoveryModel[] getMovies(URL endpoint);
     }
 
     interface Interactor {
-        DiscoveryModel[] loadData(DiscoveryFilterEnum filter, DiscoveryContract.View view);
+//        DiscoveryModel[] loadData(DiscoveryFilterEnum filter, DiscoveryContract.View view);
     }
 
     interface Presenter {
-        void discover();
+        void discover(DiscoveryFilterEnum filter);
     }
 
 }

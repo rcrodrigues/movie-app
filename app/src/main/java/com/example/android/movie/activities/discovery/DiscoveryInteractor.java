@@ -12,12 +12,13 @@ import java.net.URL;
 
 public class DiscoveryInteractor implements DiscoveryContract.Interactor {
 
-    @Override
+
     public DiscoveryModel[] loadData(DiscoveryFilterEnum movieFilter, DiscoveryContract.View view) {
 
-        URL popularMoviesRequestUrl = NetworkUtils.buildMoviesUrl(movieFilter);
-        DiscoveryModel[] discoveryModels = view.getMovies(popularMoviesRequestUrl);
-
-        return discoveryModels;
+//        URL popularMoviesRequestUrl = NetworkUtils.buildMoviesUrl(movieFilter);
+//        DiscoveryModel[] discoveryModels = view.getMovies(popularMoviesRequestUrl);
+//
+//        return discoveryModels;
+        return null;
     }
 }
