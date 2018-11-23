@@ -41,9 +41,8 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryViewHolder> 
     public void onBindViewHolder(@NonNull DiscoveryViewHolder discoveryViewHolder, int i) {
 
         DiscoveryModel movie = discoveryModels[i];
-        URL posterUrl = NetworkUtils.buildMoviePosterUrl(movie.getPosterPath(), MoviePosterSizeEnum.W185);
+        URL posterUrl = NetworkUtils.buildMoviePosterUrl(movie.getPosterPath(), MoviePosterSizeEnum.W342);
         Glide.with(activity).load(posterUrl.toString()).into(discoveryViewHolder.mMoviePoster);
-
     }
 
     @Override

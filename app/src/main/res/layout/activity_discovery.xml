@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/discovery_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        tools:listitem="@layout/discovery_view_item"
-        tools:layoutManager="GridLayoutManager" />
-</GridLayout>
+      android:id="@+id/discovery_recycler_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scrollbars="vertical"
+      tools:layoutManager="GridLayoutManager"
+      tools:listitem="@layout/discovery_view_item"/>
+</LinearLayout>

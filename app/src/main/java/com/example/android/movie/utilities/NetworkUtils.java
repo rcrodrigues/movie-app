@@ -52,7 +52,6 @@ public class NetworkUtils {
         return url;
     }
 
-//    http://image.tmdb.org/t/p/w185/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
     public static URL buildMoviePosterUrl(String moviePath, MoviePosterSizeEnum posterSizeEnum) {
         Uri builtUri = Uri.parse(MOVIE_POSTER_BASE_URL).buildUpon()
                 .appendPath(posterSizeEnum.getText())

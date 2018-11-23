@@ -15,10 +15,7 @@ public class DiscoveryInteractor implements DiscoveryContract.Interactor {
 
     public DiscoveryModel[] loadData(DiscoveryFilterEnum movieFilter, DiscoveryContract.View view) {
 
-//        URL popularMoviesRequestUrl = NetworkUtils.buildMoviesUrl(movieFilter);
-//        DiscoveryModel[] discoveryModels = view.getMovies(popularMoviesRequestUrl);
-//
-//        return discoveryModels;
+//        TODO: will be necessary in the future
         return null;
     }
 }
