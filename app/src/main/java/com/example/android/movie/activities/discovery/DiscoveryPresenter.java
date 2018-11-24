@@ -30,6 +30,7 @@ public class DiscoveryPresenter implements DiscoveryContract.Presenter{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            view.showLoading();
         }
 
         @Override
@@ -60,6 +61,7 @@ public class DiscoveryPresenter implements DiscoveryContract.Presenter{
 
             super.onPostExecute(movies);
             view.showMovies(movies);
+            view.hideLoading();
         }
     }
 

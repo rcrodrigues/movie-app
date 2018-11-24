@@ -1,41 +1,28 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  tools:context=".activities.discovery.DiscoveryActivity">
-
-  <android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cardView"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:cardUseCompatPadding="true"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:layout_height="wrap_content"
+    tools:context=".activities.discovery.DiscoveryActivity">
 
-    <android.support.constraint.ConstraintLayout
-      android:id="@+id/asd"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      >
+  <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/cardView"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      app:cardUseCompatPadding="true"
+      android:padding="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
 
-      <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/imageView1"
+        android:id="@+id/poster_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars"
-        />
-
-    </android.support.constraint.ConstraintLayout>
+        tools:src="@tools:sample/avatars" />
 
   </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

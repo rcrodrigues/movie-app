@@ -1,3 +1,5 @@
 <resources>
   <string name="app_name">movie</string>
+  <string name="action_discover_popular">Populares</string>
+  <string name="action_discover_top_rated">Melhores Avaliados</string>
 </resources>

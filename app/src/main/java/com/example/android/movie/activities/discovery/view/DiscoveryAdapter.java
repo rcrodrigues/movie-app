@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.android.movie.R;
 import com.example.android.movie.activities.discovery.DiscoveryModel;
 import com.example.android.movie.enums.MoviePosterSizeEnum;
@@ -20,6 +21,7 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryViewHolder> 
 
     private DiscoveryModel[] discoveryModels;
     private Activity activity;
+    private static final RequestOptions imageOptions = new RequestOptions().fitCenter();
 
     public DiscoveryAdapter(Activity activity) {
         this.activity = activity;
@@ -42,7 +44,11 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryViewHolder> 
 
         DiscoveryModel movie = discoveryModels[i];
         URL posterUrl = NetworkUtils.buildMoviePosterUrl(movie.getPosterPath(), MoviePosterSizeEnum.W342);
-        Glide.with(activity).load(posterUrl.toString()).into(discoveryViewHolder.mMoviePoster);
+
+        Glide.with(activity)
+                .load(posterUrl.toString())
+                .apply(imageOptions)
+                .into(discoveryViewHolder.mMoviePoster);
     }
 
     @Override

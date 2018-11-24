@@ -13,7 +13,7 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 
     public DiscoveryViewHolder(@NonNull View itemView) {
         super(itemView);
-        mMoviePoster = itemView.findViewById(R.id.imageView1);
+        mMoviePoster = itemView.findViewById(R.id.poster_image);
     }
 
 

@@ -6,6 +6,8 @@ public interface DiscoveryContract {
 
     interface View{
         void showMovies(DiscoveryModel[] texto);
+        void showLoading();
+        void hideLoading();
     }
 
     interface Interactor {
