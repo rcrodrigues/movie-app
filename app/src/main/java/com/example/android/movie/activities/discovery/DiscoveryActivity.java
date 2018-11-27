@@ -1,5 +1,6 @@
 package com.example.android.movie.activities.discovery;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,10 +13,16 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.android.movie.R;
+import com.example.android.movie.activities.details.DetailActivity;
+import com.example.android.movie.activities.discovery.entities.DiscoveryModel;
 import com.example.android.movie.activities.discovery.view.DiscoveryAdapter;
+import com.example.android.movie.activities.discovery.view.DiscoveryAdapterOnClickHandler;
 import com.example.android.movie.enums.DiscoveryFilterEnum;
+import com.example.android.movie.utilities.NetworkUtils;
 
-public class DiscoveryActivity extends AppCompatActivity implements DiscoveryContract.View {
+import static com.example.android.movie.activities.details.DetailActivity.DISCOVERY_MODEL_DATA;
+
+public class DiscoveryActivity extends AppCompatActivity implements DiscoveryContract.View, DiscoveryAdapterOnClickHandler {
 
     private DiscoveryContract.Presenter presenter;
     private RecyclerView mRecyclerView;
@@ -31,7 +38,11 @@ public class DiscoveryActivity extends AppCompatActivity implements DiscoveryCon
         presenter = new DiscoveryPresenter(this);
 
         initComponents();
-        presenter.discover(DiscoveryFilterEnum.POPULAR_MOVIES_PATH);
+
+        if(NetworkUtils.isOnline(this)) {
+            presenter.discover(DiscoveryFilterEnum.POPULAR_MOVIES_PATH);
+        }
+
         getWindow().setTitle(getString(R.string.action_discover_popular));
     }
 
@@ -40,7 +51,7 @@ public class DiscoveryActivity extends AppCompatActivity implements DiscoveryCon
         mLoadingIndicator = findViewById(R.id.discovery_progress_bar);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL, false);
-        mDiscoveryAdapter = new DiscoveryAdapter(this);
+        mDiscoveryAdapter = new DiscoveryAdapter(this, this);
 
         mRecyclerView = findViewById(R.id.discovery_recycler_view);
         mRecyclerView.setLayoutManager(gridLayoutManager);
@@ -63,6 +74,7 @@ public class DiscoveryActivity extends AppCompatActivity implements DiscoveryCon
         mLoadingIndicator.setVisibility(View.GONE);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
@@ -75,21 +87,34 @@ public class DiscoveryActivity extends AppCompatActivity implements DiscoveryCon
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        if (id == R.id.discovery_popular) {
-            presenter.discover(DiscoveryFilterEnum.POPULAR_MOVIES_PATH);
-            setTitle(getString(R.string.action_discover_popular));
-            return true;
-        }
+        if(NetworkUtils.isOnline(this)) {
 
-        if (id == R.id.discovery_top_rated) {
-            presenter.discover(DiscoveryFilterEnum.TOP_RATED_MOVIES_PATH);
-            setTitle(getString(R.string.action_discover_top_rated));
-            return true;
+            int id = item.getItemId();
+
+            if (id == R.id.discovery_popular) {
+                presenter.discover(DiscoveryFilterEnum.POPULAR_MOVIES_PATH);
+                setTitle(getString(R.string.action_discover_popular));
+                return true;
+            }
+
+            if (id == R.id.discovery_top_rated) {
+                presenter.discover(DiscoveryFilterEnum.TOP_RATED_MOVIES_PATH);
+                setTitle(getString(R.string.action_discover_top_rated));
+                return true;
+            }
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(DiscoveryModel discoveryModel) {
+
+        Intent detalActivityIntent = new Intent(this,DetailActivity.class);
+        detalActivityIntent.putExtra(DISCOVERY_MODEL_DATA,discoveryModel);
+        startActivity(detalActivityIntent);
+
     }
 
 }

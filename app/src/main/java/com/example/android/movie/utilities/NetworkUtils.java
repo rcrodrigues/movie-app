@@ -1,8 +1,13 @@
 package com.example.android.movie.utilities;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.android.movie.R;
 import com.example.android.movie.enums.DiscoveryFilterEnum;
 import com.example.android.movie.enums.MoviePosterSizeEnum;
 
@@ -13,24 +18,35 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
+import static android.support.v4.content.ContextCompat.getSystemService;
+
 public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
     private static final String MOVIE_BASE_URL = "http://api.themoviedb.org";
     private static final String MOVIE_POSTER_BASE_URL = "http://image.tmdb.org/t/p";
 
-    /* The format we want our API to return */
-    private static final String format = "json";
-    /* The units we want our API to return */
-    private static final String units = "metric";
-    /* The number of days we want our API to return */
-    private static final int numDays = 14;
-
     private static final String API_KEY = "api_key";
     // TODO: insert your own api key below!
     private static final String API_KEY_VALUE = "";
     private static final String API_NAME = "movie";
     private static final String API_VERSION = "3";
+
+    public static boolean isOnline(Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        if(!isConnected) {
+            Toast.makeText(context,R.string.no_internet, Toast.LENGTH_LONG).show();
+        }
+
+        return isConnected;
+    }
+
 
     public static URL buildMoviesUrl(DiscoveryFilterEnum filterPath) {
         Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()

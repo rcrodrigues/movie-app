@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.android.movie.R;
-import com.example.android.movie.activities.discovery.DiscoveryModel;
+import com.example.android.movie.activities.discovery.entities.DiscoveryModel;
 import com.example.android.movie.enums.MoviePosterSizeEnum;
 import com.example.android.movie.utilities.NetworkUtils;
 
@@ -21,10 +21,12 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryViewHolder> 
 
     private DiscoveryModel[] discoveryModels;
     private Activity activity;
+    private final DiscoveryAdapterOnClickHandler mClickHandler;
     private static final RequestOptions imageOptions = new RequestOptions().fitCenter();
 
-    public DiscoveryAdapter(Activity activity) {
+    public DiscoveryAdapter(Activity activity, DiscoveryAdapterOnClickHandler clickHandler) {
         this.activity = activity;
+        mClickHandler = clickHandler;
     }
 
     @NonNull
@@ -36,7 +38,7 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryViewHolder> 
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        return new DiscoveryViewHolder(view);
+        return new DiscoveryViewHolder(view, this);
     }
 
     @Override
@@ -60,6 +62,13 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryViewHolder> 
     public void setDiscoveryModels(DiscoveryModel[] discoveryModels) {
         this.discoveryModels = discoveryModels;
         notifyDataSetChanged();
+    }
+
+    protected void callOnClickHandler(int adapterPosition) {
+
+        DiscoveryModel discoveryModel = discoveryModels[adapterPosition];
+        mClickHandler.onClick(discoveryModel);
+
     }
 
 

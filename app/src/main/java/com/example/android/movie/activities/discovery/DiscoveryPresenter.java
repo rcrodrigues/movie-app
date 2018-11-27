@@ -1,20 +1,21 @@
 package com.example.android.movie.activities.discovery;
 
+import android.net.Network;
 import android.os.AsyncTask;
+
+import com.example.android.movie.R;
+import com.example.android.movie.activities.discovery.entities.DiscoveryModel;
 import com.example.android.movie.enums.DiscoveryFilterEnum;
 import com.example.android.movie.utilities.MovieJsonUtils;
 import com.example.android.movie.utilities.NetworkUtils;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
 public class DiscoveryPresenter implements DiscoveryContract.Presenter{
 
     DiscoveryContract.View view;
-    DiscoveryContract.Interactor interactor;
 
     public DiscoveryPresenter(DiscoveryContract.View view) {
         this.view = view;
-        this.interactor = new DiscoveryInteractor();
     }
 
     @Override
@@ -46,7 +47,7 @@ public class DiscoveryPresenter implements DiscoveryContract.Presenter{
 
                 String jsonMoviesResponse = NetworkUtils.getResponseFromHttpUrl(moviesRequestUrl);
 
-                DiscoveryModel[] discoveryModel = MovieJsonUtils.getMovieDataFromJson(jsonMoviesResponse);
+                DiscoveryModel[] discoveryModel = MovieJsonUtils.getDiscoveryDataFromJson(jsonMoviesResponse);
 
                 return discoveryModel;
 

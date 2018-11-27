@@ -7,14 +7,23 @@ import android.widget.ImageView;
 
 import com.example.android.movie.R;
 
-public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
+public class DiscoveryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public final ImageView mMoviePoster;
+    private final DiscoveryAdapter mDiscoveryAdapter;
 
-    public DiscoveryViewHolder(@NonNull View itemView) {
+    public DiscoveryViewHolder(@NonNull View itemView, DiscoveryAdapter adapter) {
         super(itemView);
+        mDiscoveryAdapter = adapter;
         mMoviePoster = itemView.findViewById(R.id.poster_image);
+        mMoviePoster.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View v) {
 
+        int adapterPosition = getAdapterPosition();
+        mDiscoveryAdapter.callOnClickHandler(adapterPosition);
+
+    }
 }

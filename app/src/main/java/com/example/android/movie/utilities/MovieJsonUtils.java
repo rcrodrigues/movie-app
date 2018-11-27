@@ -1,46 +1,26 @@
 package com.example.android.movie.utilities;
 
-import android.content.Context;
-
-import com.example.android.movie.activities.discovery.DiscoveryModel;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.android.movie.activities.discovery.entities.DiscoveryModel;
+import com.example.android.movie.activities.discovery.entities.DiscoveryPage;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 public final class MovieJsonUtils {
 
-    private static final String TITLE = "title";
-    private static final String POSTER_PATH = "poster_path";
-    private static final String OVERVIEW = "overview";
-    private static final String VOTE_AVARAGE  = "vote_average";
-    private static final String RELEASE_DATE = "release_date";
+    public static DiscoveryModel[] getDiscoveryDataFromJson(String discoveryJsonStr) {
 
-    public static DiscoveryModel[] getMovieDataFromJson(String movieJsonStr) throws JSONException {
+        JsonParser parser = new JsonParser();
+        JsonElement mJson =  parser.parse(discoveryJsonStr);
+        Gson gson = new Gson();
+        DiscoveryPage page = gson.fromJson(mJson, DiscoveryPage.class);
 
-        final String MOVIE_LIST = "results";
-
-        JSONObject moviesJson = new JSONObject(movieJsonStr);
-
-        JSONArray moviesArray = moviesJson.getJSONArray(MOVIE_LIST);
-
-        DiscoveryModel[] parsedMovieData = new DiscoveryModel[moviesArray.length()];
-
-        for (int i = 0; i < moviesArray.length(); i++) {
-
-            JSONObject movieJsonObject = moviesArray.getJSONObject(i);
-
-            DiscoveryModel movie = new DiscoveryModel();
-
-            movie.setTitle(movieJsonObject.getString(TITLE));
-            movie.setPosterPath(movieJsonObject.getString(POSTER_PATH));
-            movie.setOverview(movieJsonObject.getString(OVERVIEW));
-            movie.setVoteAverage(movieJsonObject.getDouble(VOTE_AVARAGE));
-            movie.setReleaseDate(movieJsonObject.getString(RELEASE_DATE));
-
-            parsedMovieData[i] = movie;
+        if(page.getResults() == null) {
+            return null;
         }
 
-        return parsedMovieData;
+        DiscoveryModel[] modelArray = new DiscoveryModel[page.getResults().size()];
+
+        return page.getResults().toArray(modelArray);
     }
 }
