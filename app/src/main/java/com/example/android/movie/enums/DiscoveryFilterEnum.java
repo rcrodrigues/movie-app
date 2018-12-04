@@ -1,6 +1,8 @@
 package com.example.android.movie.enums;
 
-public enum DiscoveryFilterEnum {
+import java.io.Serializable;
+
+public enum DiscoveryFilterEnum implements Serializable {
 
     POPULAR_MOVIES_PATH("popular"),
     TOP_RATED_MOVIES_PATH("top_rated");

@@ -3,6 +3,7 @@ package com.example.android.movie.activities.discovery;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.example.android.movie.R;
@@ -24,10 +26,15 @@ import static com.example.android.movie.activities.details.DetailActivity.DISCOV
 
 public class DiscoveryActivity extends AppCompatActivity implements DiscoveryContract.View, DiscoveryAdapterOnClickHandler {
 
+    private static final String SELECTED_FILTER = "selected_filter";
+    private static final String TITLE = "activity_title";
+
+    private DiscoveryFilterEnum mDiscoveryFilter;
     private DiscoveryContract.Presenter presenter;
     private RecyclerView mRecyclerView;
     private DiscoveryAdapter mDiscoveryAdapter;
-    private ProgressBar mLoadingIndicator;
+    private FrameLayout mLoadingIndicator;
+    private SwipeRefreshLayout mSwipeContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,11 +46,28 @@ public class DiscoveryActivity extends AppCompatActivity implements DiscoveryCon
 
         initComponents();
 
+        this.setDiscoveryFilter(savedInstanceState);
+
         if(NetworkUtils.isOnline(this)) {
-            presenter.discover(DiscoveryFilterEnum.POPULAR_MOVIES_PATH);
+            presenter.discover(mDiscoveryFilter);
         }
 
         getWindow().setTitle(getString(R.string.action_discover_popular));
+    }
+
+    private void setDiscoveryFilter(@Nullable Bundle savedInstanceState) {
+
+        if(savedInstanceState != null) {
+
+            mDiscoveryFilter = (DiscoveryFilterEnum) savedInstanceState.get(SELECTED_FILTER);
+            setTitle((String) savedInstanceState.get(TITLE));
+
+        } else {
+
+            mDiscoveryFilter = DiscoveryFilterEnum.POPULAR_MOVIES_PATH;
+            setTitle(R.string.action_discover_popular);
+
+        }
     }
 
     void initComponents() {
@@ -57,6 +81,16 @@ public class DiscoveryActivity extends AppCompatActivity implements DiscoveryCon
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setAdapter(mDiscoveryAdapter);
         mRecyclerView.setHasFixedSize(true);
+
+        mSwipeContainer = findViewById(R.id.swipeContainer);
+        mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.discover(mDiscoveryFilter);
+            }
+        });
+
+        mSwipeContainer.setColorSchemeResources(R.color.colorAccent);
     }
 
     @Override
@@ -66,12 +100,19 @@ public class DiscoveryActivity extends AppCompatActivity implements DiscoveryCon
 
     @Override
     public void showLoading() {
+        if(mSwipeContainer.isRefreshing()) {
+            return;
+        }
         mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
         mLoadingIndicator.setVisibility(View.GONE);
+        if(mSwipeContainer.isRefreshing()) {
+            mSwipeContainer.setRefreshing(false);
+        }
+        mRecyclerView.getLayoutManager().smoothScrollToPosition(mRecyclerView,null,0);
     }
 
 
@@ -93,14 +134,16 @@ public class DiscoveryActivity extends AppCompatActivity implements DiscoveryCon
             int id = item.getItemId();
 
             if (id == R.id.discovery_popular) {
-                presenter.discover(DiscoveryFilterEnum.POPULAR_MOVIES_PATH);
+                mDiscoveryFilter = DiscoveryFilterEnum.POPULAR_MOVIES_PATH;
                 setTitle(getString(R.string.action_discover_popular));
+                presenter.discover(mDiscoveryFilter);
                 return true;
             }
 
             if (id == R.id.discovery_top_rated) {
-                presenter.discover(DiscoveryFilterEnum.TOP_RATED_MOVIES_PATH);
+                mDiscoveryFilter = DiscoveryFilterEnum.TOP_RATED_MOVIES_PATH;
                 setTitle(getString(R.string.action_discover_top_rated));
+                presenter.discover(mDiscoveryFilter);
                 return true;
             }
         }
@@ -116,5 +159,14 @@ public class DiscoveryActivity extends AppCompatActivity implements DiscoveryCon
         startActivity(detalActivityIntent);
 
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(SELECTED_FILTER, mDiscoveryFilter);
+        outState.putSerializable(TITLE, getTitle().toString());
+        super.onSaveInstanceState(outState);
+    }
+
+
 
 }
