@@ -13,8 +13,6 @@ import com.example.android.movie.activities.discovery.entities.DiscoveryModel;
 import com.example.android.movie.enums.MoviePosterSizeEnum;
 import com.example.android.movie.utilities.NetworkUtils;
 
-import org.w3c.dom.Text;
-
 import java.net.URL;
 
 public class DetailActivity extends AppCompatActivity {
@@ -64,11 +62,12 @@ public class DetailActivity extends AppCompatActivity {
 
             Glide.with(this)
                     .load(posterUrl.toString())
+                    .apply(imageOptions)
                     .into(imPoster);
 
 
             tvTitle.setText(movie.getTitle());
-            tvRating.setText(String.valueOf(movie.getPopularity()));
+            tvRating.setText(String.valueOf(movie.getVoteAverage()));
             tvReleaseDate.setText(movie.getReleaseDate());
             tvOverview.setText(movie.getOverview());
         }

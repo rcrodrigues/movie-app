@@ -22,7 +22,7 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryViewHolder> 
     private DiscoveryModel[] discoveryModels;
     private Activity activity;
     private final DiscoveryAdapterOnClickHandler mClickHandler;
-    private static final RequestOptions imageOptions = new RequestOptions().fitCenter();
+    private static final RequestOptions imageOptions = new RequestOptions().override(500,800);
 
     public DiscoveryAdapter(Activity activity, DiscoveryAdapterOnClickHandler clickHandler) {
         this.activity = activity;
@@ -45,7 +45,7 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryViewHolder> 
     public void onBindViewHolder(@NonNull DiscoveryViewHolder discoveryViewHolder, int i) {
 
         DiscoveryModel movie = discoveryModels[i];
-        URL posterUrl = NetworkUtils.buildMoviePosterUrl(movie.getPosterPath(), MoviePosterSizeEnum.W342);
+        URL posterUrl = NetworkUtils.buildMoviePosterUrl(movie.getPosterPath(), MoviePosterSizeEnum.W185);
 
         Glide.with(activity)
                 .load(posterUrl.toString())

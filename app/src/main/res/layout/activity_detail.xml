@@ -1,81 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
-    android:layout_width="match_parent"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent" android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/background_dark"
-        android:orientation="vertical"
-        tools:context=".activities.details.DetailActivity">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/fab_margin">
+            android:background="@color/colorPrimary">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            <ImageView
+                android:id="@+id/detail_poster_image"
+                android:layout_width="146dp"
+                android:layout_height="197dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/movie_poster"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.055"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+            <TextView
+                android:id="@+id/detail_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@android:color/background_light"
+                app:layout_constraintEnd_toEndOf="@+id/detail_poster_image"
+                app:layout_constraintHorizontal_bias="0.483"
+                app:layout_constraintStart_toStartOf="@+id/detail_poster_image"
+                app:layout_constraintTop_toBottomOf="@+id/detail_poster_image"
+                tools:text="Free Wheely: The Magic and Beast" />
 
-                    <ImageView
-                        android:id="@+id/detail_poster_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@android:string/dialog_alert_title"
-                        tools:srcCompat="@tools:sample/avatars" />
+            <TextView
+                android:id="@+id/detail_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/detail_rating"
+                app:layout_constraintHorizontal_bias="0.397"
+                app:layout_constraintStart_toStartOf="@+id/detail_rating"
+                app:layout_constraintTop_toBottomOf="@+id/detail_rating"
+                app:layout_constraintVertical_bias="1.0" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+            <TextView
+                android:id="@+id/detail_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:drawableStart="@drawable/ic_star_yellow_24dp"
+                android:gravity="center_vertical"
+                android:text="@string/float_number"
+                android:textColor="@android:color/holo_orange_light"
+                app:layout_constraintEnd_toEndOf="@+id/detail_title"
+                app:layout_constraintStart_toStartOf="@+id/detail_title"
+                app:layout_constraintTop_toBottomOf="@+id/detail_title" />
 
-                        <TextView
-                            android:id="@+id/detail_title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="TextView"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="22dp" />
+        </android.support.constraint.ConstraintLayout>
 
-                        <TextView
-                            android:id="@+id/detail_release_date"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="TextView"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:id="@+id/detail_rating"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="TextView"
-                            android:textColor="@color/colorAccent" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="top"
+            android:padding="@dimen/text_margin"
+            android:text="@string/overview"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <TextView
             android:id="@+id/detail_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/background_light"
-            android:text="TextView" />
+            android:gravity="fill_horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            tools:text="@string/big_text" />
 
     </LinearLayout>
-
 </ScrollView>
