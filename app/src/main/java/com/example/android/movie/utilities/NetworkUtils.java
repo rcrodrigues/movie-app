@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.android.movie.BuildConfig;
 import com.example.android.movie.R;
 import com.example.android.movie.enums.DiscoveryFilterEnum;
 import com.example.android.movie.enums.MoviePosterSizeEnum;
@@ -28,7 +29,7 @@ public class NetworkUtils {
 
     private static final String API_KEY = "api_key";
     // TODO: insert your own api key below!
-    private static final String API_KEY_VALUE = "";
+    private static final String API_KEY_VALUE = BuildConfig.MOVIE_DB_API_KEY;
     private static final String API_NAME = "movie";
     private static final String API_VERSION = "3";
 
